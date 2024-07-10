@@ -4,9 +4,7 @@ import * as tf from "@tensorflow/tfjs";
 import * as tfvis from "@tensorflow/tfjs-vis";
 import * as Papa from "papaparse";
 import _ from "lodash";
-
-// Complete tutorial:
-// http://bit.ly/Predicting-Diabetes-using-Logistic-Regression
+import Plotly from "plotly.js-dist";
 
 Papa.parsePromise = function (file) {
   return new Promise(function (complete, error) {
@@ -24,7 +22,7 @@ const oneHot = (outcome) => Array.from(tf.oneHot(outcome, 2).dataSync());
 
 const prepareData = async () => {
   const csv = await Papa.parsePromise(
-    "https://raw.githubusercontent.com/curiousily/Logistic-Regression-with-TensorFlow-js/master/src/data/diabetes.csv"
+    "https://raw.githubusercontent.com/curiousily/Logistic-Regression-with-TensorFlow-js/master/src/data/diabetes.csv",
   );
 
   return csv.data;
@@ -35,7 +33,7 @@ const createDataSets = (data, features, testSize, batchSize) => {
     features.map((f) => {
       const val = r[f];
       return val === undefined ? 0 : val;
-    })
+    }),
   );
   const y = data.map((r) => {
     const outcome = r.Outcome === undefined ? 0 : r.Outcome;
@@ -78,6 +76,79 @@ const renderOutcomes = (data) => {
   });
 };
 
+const renderHistogram = (container, data, column, config) => {
+  const diabetic = data.filter((r) => r.Outcome === 1).map((r) => r[column]);
+  const healthy = data.filter((r) => r.Outcome === 0).map((r) => r[column]);
+
+  const dTrace = {
+    name: "diabetic",
+    x: diabetic,
+    type: "histogram",
+    opacity: 0.6,
+    marker: {
+      color: "gold",
+    },
+  };
+
+  const hTrace = {
+    name: "healthy",
+    x: healthy,
+    type: "histogram",
+    opacity: 0.4,
+    marker: {
+      color: "forestgreen",
+    },
+  };
+
+  Plotly.newPlot(container, [dTrace, hTrace], {
+    barmode: "overlay",
+    xaxis: {
+      title: config.xLabel,
+    },
+    yaxis: { title: "Count" },
+    title: config.title,
+  });
+};
+
+const renderScatter = (container, data, columns, config) => {
+  const diabetic = data.filter((r) => r.Outcome === 1);
+  const healthy = data.filter((r) => r.Outcome === 0);
+
+  var dTrace = {
+    x: diabetic.map((r) => r[columns[0]]),
+    y: diabetic.map((r) => r[columns[1]]),
+    mode: "markers",
+    type: "scatter",
+    name: "Diabetic",
+    opacity: 0.4,
+    marker: {
+      color: "gold",
+    },
+  };
+
+  var hTrace = {
+    x: healthy.map((r) => r[columns[0]]),
+    y: healthy.map((r) => r[columns[1]]),
+    mode: "markers",
+    type: "scatter",
+    name: "Healthy",
+    opacity: 0.4,
+    marker: {
+      color: "forestgreen",
+    },
+  };
+
+  var chartData = [dTrace, hTrace];
+
+  Plotly.newPlot(container, chartData, {
+    title: config.title,
+    xaxis: {
+      title: config.xLabel,
+    },
+    yaxis: { title: config.yLabel },
+  });
+};
+
 const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
   const model = tf.sequential();
   model.add(
@@ -85,7 +156,7 @@ const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
       units: 2,
       activation: "softmax",
       inputShape: [featureCount],
-    })
+    }),
   );
   const optimizer = tf.train.adam(0.001);
   model.compile({
@@ -117,19 +188,47 @@ const run = async () => {
 
   renderOutcomes(data);
 
+  renderHistogram("insulin-cont", data, "Insulin", {
+    title: "Insulin levels",
+    xLabel: "Insulin 2-hour serum, mu U/ml",
+  });
+
+  renderHistogram("glucose-cont", data, "Glucose", {
+    title: "Glucose concentration",
+    xLabel:
+      "Plasma glucose concentration (2 hour after glucose tolerance test)",
+  });
+
+  renderHistogram("age-cont", data, "Age", {
+    title: "Age",
+    xLabel: "age (years)",
+  });
+
+  renderScatter("glucose-age-cont", data, ["Glucose", "Age"], {
+    title: "Glucose vs Age",
+    xLabel: "Glucose",
+    yLabel: "Age",
+  });
+
+  renderScatter("skin-bmi-cont", data, ["SkinThickness", "BMI"], {
+    title: "Skin thickness vs BMI",
+    xLabel: "Skin thickness",
+    yLabel: "BMI",
+  });
+
   const features = ["Glucose"];
 
   const [trainDs, validDs, xTest, yTest] = createDataSets(
     data,
     features,
     0.1,
-    16
+    16,
   );
 
   const model = await trainLogisticRegression(
     features.length,
     trainDs,
-    validDs
+    validDs,
   );
 
   const preds = model.predict(xTest).argMax(-1);
