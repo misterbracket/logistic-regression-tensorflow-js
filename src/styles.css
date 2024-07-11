@@ -7,3 +7,7 @@ body {
   margin: 2rem auto;
   text-align: center;
 }
+
+#form_section {
+  display: none;
+}

@@ -6,6 +6,8 @@ import * as Papa from "papaparse";
 import _ from "lodash";
 import { renderOutcomes, renderGraphs } from "./createGraphs.js";
 
+const formSection = document.getElementById("form_section");
+
 Papa.parsePromise = function (file) {
   return new Promise(function (complete, error) {
     Papa.parse(file, {
@@ -110,6 +112,7 @@ const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
     },
   });
 
+  console.log("Model training completed");
   return model;
 };
 
@@ -181,22 +184,6 @@ const run = async () => {
   // We use the test data to evaluate the model
   // We use the confusion matrix to see how the model performs
 
-  //get data from form and predict
-  const formData = {
-    interactive_demo_completion: 0.1,
-    revisiting_lead_status: 0.2,
-  };
-  //create tensor from data
-  const tensorData = tf.tensor([Object.values(formData)]);
-  //predict
-
-  const prediction = model.predict(tensorData);
-  console.log(prediction);
-  // get the outcome
-  // const outcome = prediction.argMax(-1).dataSync()[0];
-  const outcome = prediction.argMax(-1).dataSync()[0];
-  console.log(outcome);
-
   const preds = model.predict(xTest).argMax(-1);
   const labels = yTest.argMax(-1);
 
@@ -208,10 +195,58 @@ const run = async () => {
     values: confusionMatrix,
     tickLabels: ["NoCustomer", "Customer"],
   });
+
+  return model;
 };
 
+let model;
+
 if (document.readyState !== "loading") {
-  run();
+  // run();
+  run().then((r) => {
+    formSection.style.display = "block";
+
+    model = r;
+  });
 } else {
-  document.addEventListener("DOMContentLoaded", run);
+  document.addEventListener("DOMContentLoaded", () => {
+    run().then((r) => {
+      formSection.style.display = "block";
+
+      model = r;
+    });
+  });
 }
+
+// Form submission
+
+const form = document.getElementById("form_calulation");
+const demoInput = document.getElementById("demo_completion_input");
+const leadStatusInput = document.getElementById("revisiting_lead_status_input");
+
+const submitCalculation = (e) => {
+  e.preventDefault();
+  document.getElementByName;
+
+  console.log("DEMO_INPUT", demoInput.value);
+  console.log("LEAD_SOURCE_INPUT", leadStatusInput.value);
+
+  //get data from form and predict
+  const formData = {
+    interactive_demo_completion: demoInput.value / 100,
+    revisiting_lead_status: leadStatusInput.value / 100,
+  };
+
+  //create tensor from data
+  const tensorData = tf.tensor([Object.values(formData)]);
+
+  //predict
+  const prediction = model.predict(tensorData);
+  console.log("PREDICTION", prediction);
+
+  // get the outcome
+  const outcome = prediction.argMax(-1).dataSync()[0];
+  console.log("OUTCOME:", outcome);
+};
+
+form.addEventListener("submit", submitCalculation);

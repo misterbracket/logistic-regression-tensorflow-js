@@ -6,9 +6,39 @@
   </head>
 
   <body>
-    <div id="tutorial">
-      <h1>Predicting lead scores</h1>
-    </div>
+    <h1>Predicting lead scores</h1>
+
+    <section id="form_section">
+      <div id="tutorial"></div>
+      <hr />
+      <form id="form_calulation">
+        <label>
+          Demo completion %
+          <input
+            id="demo_completion_input"
+            name="demo_completion"
+            type="number"
+            min="1"
+            max="100"
+          />
+        </label>
+
+        <label>
+          Revisiting lead status
+          <input
+            id="revisiting_lead_status_input"
+            name="revisiting_lead_status"
+            type="number"
+            min="1"
+            max="100"
+          />
+        </label>
+
+        <button type="submit">Calculate</button>
+      </form>
+      <hr />
+    </section>
+
     <div id="outcome-cont" />
     <div id="interactive-demo-cont" />
     <div id="glucose-cont" />
