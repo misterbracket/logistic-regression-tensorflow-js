@@ -5,6 +5,7 @@ import * as tfvis from "@tensorflow/tfjs-vis";
 import * as Papa from "papaparse";
 import _ from "lodash";
 import { renderOutcomes, renderGraphs } from "./createGraphs.js";
+import { runForm } from "./form.js";
 
 const formSection = document.getElementById("form_section");
 
@@ -101,7 +102,7 @@ const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
   // We use callbacks to log the loss and accuracy
   // We also use tfvis to visualize the training process
   await model.fitDataset(trainDs, {
-    epochs: 10,
+    epochs: 100,
     validationData: validDs,
     callbacks: {
       onEpochEnd: async (_, logs) => {
@@ -138,78 +139,35 @@ const run = async () => {
     validDs,
   );
 
-  // const model = await trainComplexModel(features.length, trainDs, validDs);
-
   // Evaluate the model
   // We use the test data to evaluate the model
   // We use the confusion matrix to see how the model performs
 
-  const preds = model.predict(xTest).argMax(-1);
-  const labels = yTest.argMax(-1);
-
-  const confusionMatrix = await tfvis.metrics.confusionMatrix(labels, preds);
-
-  const container = document.getElementById("confusion-matrix");
-
-  tfvis.render.confusionMatrix(container, {
-    values: confusionMatrix,
-    tickLabels: ["NoCustomer", "Customer"],
-  });
+  // const preds = model.predict(xTest).argMax(-1);
+  // const labels = yTest.argMax(-1);
+  //
+  // const confusionMatrix = await tfvis.metrics.confusionMatrix(labels, preds);
+  //
+  // const container = document.getElementById("confusion-matrix");
+  //
+  // tfvis.render.confusionMatrix(container, {
+  //   values: confusionMatrix,
+  //   tickLabels: ["NoCustomer", "Customer"],
+  // });
 
   return model;
 };
 
-let model;
-
 if (document.readyState !== "loading") {
-  // run();
-  run().then((r) => {
+  run().then((model) => {
     formSection.style.display = "flex";
-    model = r;
+    runForm(model);
   });
 } else {
   document.addEventListener("DOMContentLoaded", () => {
-    run().then((r) => {
+    run().then((model) => {
       formSection.style.display = "flex";
-      model = r;
+      runForm(model);
     });
   });
 }
-
-// Form submission
-
-const form = document.getElementById("form_calulation");
-const demoInput = document.getElementById("demo_completion_input");
-const leadStatusInput = document.getElementById("revisiting_lead_status_input");
-
-const submitCalculation = (e) => {
-  e.preventDefault();
-  document.getElementByName;
-
-  console.log("DEMO_INPUT", demoInput.value);
-  console.log("LEAD_SOURCE_INPUT", leadStatusInput.value);
-
-  //get data from form and predict
-  const formData = {
-    interactive_demo_completion: demoInput.value / 100,
-    revisiting_lead_status: leadStatusInput.value / 100,
-  };
-
-  //create tensor from data
-  const tensorData = tf.tensor([Object.values(formData)]);
-
-  //predict
-  const prediction = model.predict(tensorData);
-  console.log("PREDICTION", prediction);
-
-  // get the outcome
-  const outcome = prediction.argMax(-1).dataSync()[0];
-  console.log("OUTCOME:", outcome);
-
-  const outcomeElement = document.getElementById("outcome");
-  outcomeElement.style.display = "block";
-  outcomeElement.innerText =
-    outcome === 0 ? "They won't be a Customer" : "They will be a Customer";
-};
-
-form.addEventListener("submit", submitCalculation);
