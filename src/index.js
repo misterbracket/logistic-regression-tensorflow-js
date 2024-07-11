@@ -22,7 +22,7 @@ const oneHot = (outcome) => Array.from(tf.oneHot(outcome, 2).dataSync());
 
 const prepareData = async () => {
   const csv = await Papa.parsePromise(
-    "https://raw.githubusercontent.com/misterbracket/logistic-regression-tensorflow-js/main/src/data/data.csv",
+    "https://raw.githubusercontent.com/misterbracket/logistic-regression-tensorflow-js/main/src/data/fake_data.csv",
   );
   return csv.data;
 };
@@ -180,6 +180,23 @@ const run = async () => {
   // Evaluate the model
   // We use the test data to evaluate the model
   // We use the confusion matrix to see how the model performs
+
+  //get data from form and predict
+  const formData = {
+    interactive_demo_completion: 0.1,
+    revisiting_lead_status: 0.2,
+  };
+  //create tensor from data
+  const tensorData = tf.tensor([Object.values(formData)]);
+  //predict
+
+  const prediction = model.predict(tensorData);
+  console.log(prediction);
+  // get the outcome
+  // const outcome = prediction.argMax(-1).dataSync()[0];
+  const outcome = prediction.argMax(-1).dataSync()[0];
+  console.log(outcome);
+
   const preds = model.predict(xTest).argMax(-1);
   const labels = yTest.argMax(-1);
 
