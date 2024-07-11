@@ -22,7 +22,7 @@ const oneHot = (outcome) => Array.from(tf.oneHot(outcome, 2).dataSync());
 
 const prepareData = async () => {
   const csv = await Papa.parsePromise(
-    "https://raw.githubusercontent.com/misterbracket/logistic-regression-tensorflow-js/main/src/data/leads_generated_test_data.csv",
+    "https://raw.githubusercontent.com/misterbracket/logistic-regression-tensorflow-js/main/src/data/data.csv",
   );
   return csv.data;
 };
@@ -63,7 +63,6 @@ const createDataSets = (data, features, testSize, batchSize) => {
 };
 
 const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
-  // Create a simple logistic regression model
   const model = tf.sequential();
   // Add a dense layer
   // Dense layers are fully connected layers
@@ -103,7 +102,7 @@ const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
     epochs: 100,
     validationData: validDs,
     callbacks: {
-      onEpochEnd: async (epoch, logs) => {
+      onEpochEnd: async (_, logs) => {
         trainLogs.push(logs);
         tfvis.show.history(lossContainer, trainLogs, ["loss", "val_loss"]);
         tfvis.show.history(accContainer, trainLogs, ["acc", "val_acc"]);
@@ -114,6 +113,46 @@ const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
   return model;
 };
 
+// const trainComplexModel = async (featureCount, trainDs, validDs) => {
+//   const model = tf.sequential();
+//   model.add(
+//     tf.layers.dense({
+//       units: 12,
+//       activation: "relu",
+//       inputShape: [featureCount],
+//     }),
+//   );
+//   model.add(
+//     tf.layers.dense({
+//       units: 2,
+//       activation: "softmax",
+//     }),
+//   );
+//   const optimizer = tf.train.adam(0.0001);
+//   model.compile({
+//     optimizer: optimizer,
+//     loss: "binaryCrossentropy",
+//     metrics: ["accuracy"],
+//   });
+//   const trainLogs = [];
+//   const lossContainer = document.getElementById("loss-cont");
+//   const accContainer = document.getElementById("acc-cont");
+//   console.log("Training...");
+//   await model.fitDataset(trainDs, {
+//     epochs: 100,
+//     validationData: validDs,
+//     callbacks: {
+//       onEpochEnd: async (epoch, logs) => {
+//         trainLogs.push(logs);
+//         tfvis.show.history(lossContainer, trainLogs, ["loss", "val_loss"]);
+//         tfvis.show.history(accContainer, trainLogs, ["acc", "val_acc"]);
+//       },
+//     },
+//   });
+//
+//   return model;
+// };
+
 const run = async () => {
   const data = await prepareData();
 
@@ -121,7 +160,7 @@ const run = async () => {
 
   renderGraphs(data);
 
-  const features = ["interactive_demo_completion"];
+  const features = ["interactive_demo_completion", "revisiting_lead_status"];
 
   const [trainDs, validDs, xTest, yTest] = createDataSets(
     data,
@@ -136,6 +175,8 @@ const run = async () => {
     validDs,
   );
 
+  // const model = await trainComplexModel(features.length, trainDs, validDs);
+
   // Evaluate the model
   // We use the test data to evaluate the model
   // We use the confusion matrix to see how the model performs
@@ -148,7 +189,7 @@ const run = async () => {
 
   tfvis.render.confusionMatrix(container, {
     values: confusionMatrix,
-    tickLabels: ["Healthy", "Diabetic"],
+    tickLabels: ["NoCustomer", "Customer"],
   });
 };
 
