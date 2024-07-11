@@ -13,57 +13,16 @@ export const renderGraphs = (data) => {
       xLabel: "Interactive Demo Completion Rate",
     },
   );
-  //
-  // renderHistogram("glucose-cont", data, "Glucose", {
-  //   title: "Glucose concentration",
-  //   xLabel:
-  //     "Plasma glucose concentration (2 hour after glucose tolerance test)",
-  // });
-  //
-  // renderHistogram("age-cont", data, "Age", {
-  //   title: "Age",
-  //   xLabel: "age (years)",
-  // });
-  //
-  // renderScatter("glucose-age-cont", data, ["Glucose", "Age"], {
-  //   title: "Glucose vs Age",
-  //   xLabel: "Glucose",
-  //   yLabel: "Age",
-  // });
-  //
-  // renderScatter("skin-bmi-cont", data, ["SkinThickness", "BMI"], {
-  //   title: "Skin thickness vs BMI",
-  //   xLabel: "Skin thickness",
-  //   yLabel: "BMI",
-  // });
 
-  // renderHistogram("insulin-cont", data, "Insulin", {
-  //   title: "Insulin levels",
-  //   xLabel: "Insulin 2-hour serum, mu U/ml",
-  // });
-  //
-  // renderHistogram("glucose-cont", data, "Glucose", {
-  //   title: "Glucose concentration",
-  //   xLabel:
-  //     "Plasma glucose concentration (2 hour after glucose tolerance test)",
-  // });
-  //
-  // renderHistogram("age-cont", data, "Age", {
-  //   title: "Age",
-  //   xLabel: "age (years)",
-  // });
-  //
-  // renderScatter("glucose-age-cont", data, ["Glucose", "Age"], {
-  //   title: "Glucose vs Age",
-  //   xLabel: "Glucose",
-  //   yLabel: "Age",
-  // });
-  //
-  // renderScatter("skin-bmi-cont", data, ["SkinThickness", "BMI"], {
-  //   title: "Skin thickness vs BMI",
-  //   xLabel: "Skin thickness",
-  //   yLabel: "BMI",
-  // });
+  renderHistogram(
+    "revisiting-lead-status-cont",
+    data,
+    "revisiting_lead_status",
+    {
+      title: "Revisiting Lead Status",
+      xLabel: "Revisiting Lead Status in Percentage",
+    },
+  );
 };
 
 export const renderOutcomes = (data) => {
