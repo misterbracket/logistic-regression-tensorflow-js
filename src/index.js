@@ -4,7 +4,7 @@ import * as tf from "@tensorflow/tfjs";
 import * as tfvis from "@tensorflow/tfjs-vis";
 import * as Papa from "papaparse";
 import _ from "lodash";
-import { renderOutcomes } from "./createGraphs.js";
+import { renderOutcomes, renderGraphs } from "./createGraphs.js";
 
 Papa.parsePromise = function (file) {
   return new Promise(function (complete, error) {
@@ -65,8 +65,8 @@ const createDataSets = (data, features, testSize, batchSize) => {
 const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
   // Create a simple logistic regression model
   const model = tf.sequential();
-  //  Add a dense layer
-  //  Dense layers are fully connected layers
+  // Add a dense layer
+  // Dense layers are fully connected layers
   // units: 2, because we have 2 outcomes
   // activation: softmax, because we want to classify the data
   // softmax is a function that squashes the values between 0 and 1
@@ -130,27 +130,26 @@ const run = async () => {
     16,
   );
 
-  // const model = await trainLogisticRegression(
-  //   features.length,
-  //   trainDs,
-  //   validDs,
-  // );
-  //
+  const model = await trainLogisticRegression(
+    features.length,
+    trainDs,
+    validDs,
+  );
+
   // Evaluate the model
   // We use the test data to evaluate the model
   // We use the confusion matrix to see how the model performs
-  //   const preds = model.predict(xTest).argMax(-1);
-  //   const labels = yTest.argMax(-1);
-  //
-  //   const confusionMatrix = await tfvis.metrics.confusionMatrix(labels, preds);
-  //
-  //   const container = document.getElementById("confusion-matrix");
-  //
-  //   tfvis.render.confusionMatrix(container, {
-  //     values: confusionMatrix,
-  //     tickLabels: ["Healthy", "Diabetic"],
-  //   });
-  // };
+  const preds = model.predict(xTest).argMax(-1);
+  const labels = yTest.argMax(-1);
+
+  const confusionMatrix = await tfvis.metrics.confusionMatrix(labels, preds);
+
+  const container = document.getElementById("confusion-matrix");
+
+  tfvis.render.confusionMatrix(container, {
+    values: confusionMatrix,
+    tickLabels: ["Healthy", "Diabetic"],
+  });
 };
 
 if (document.readyState !== "loading") {
