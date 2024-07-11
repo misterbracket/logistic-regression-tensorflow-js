@@ -29,19 +29,27 @@ const prepareData = async () => {
 };
 
 const createDataSets = (data, features, testSize, batchSize) => {
+  //These arre the features that will be used to train the model
   const X = data.map((r) =>
     features.map((f) => {
       const val = r[f];
       return val === undefined ? 0 : val;
     }),
   );
+
+  // The outcome of the model
+  // We use one hot encoding to represent the outcome
   const y = data.map((r) => {
     const outcome = r.Outcome === undefined ? 0 : r.Outcome;
     return oneHot(outcome);
   });
 
+  //Split the data into training and testing sets
   const splitIdx = parseInt((1 - testSize) * data.length, 10);
 
+  // Create a dataset from the data
+  // We zip the features and the outcome together
+  // Shuffle the data and split it into batches
   const ds = tf.data
     .zip({ xs: tf.data.array(X), ys: tf.data.array(y) })
     .shuffle(data.length, 42);
@@ -150,7 +158,14 @@ const renderScatter = (container, data, columns, config) => {
 };
 
 const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
+  // Create a simple logistic regression model
   const model = tf.sequential();
+  //  Add a dense layer
+  //  Dense layers are fully connected layers
+  // units: 2, because we have 2 outcomes
+  // activation: softmax, because we want to classify the data
+  // softmax is a function that squashes the values between 0 and 1
+  // inputShape: [featureCount], because we have featureCount number of features
   model.add(
     tf.layers.dense({
       units: 2,
@@ -158,16 +173,27 @@ const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
       inputShape: [featureCount],
     }),
   );
+
+  // Compile the model
+  // we use adam optimizer that is a popular optimizer
+  // loss: binaryCrossentropy, because we have 2 outcomes
+  // we want to minimize the loss
   const optimizer = tf.train.adam(0.001);
   model.compile({
     optimizer: optimizer,
     loss: "binaryCrossentropy",
     metrics: ["accuracy"],
   });
+
+  // Train the model
   const trainLogs = [];
   const lossContainer = document.getElementById("loss-cont");
   const accContainer = document.getElementById("acc-cont");
   console.log("Training...");
+  // We train the model for 100 epochs meaning we go through the dataset 100 times
+  // We also pass the validation data so we can see how the model performs on unseen data
+  // We use callbacks to log the loss and accuracy
+  // We also use tfvis to visualize the training process
   await model.fitDataset(trainDs, {
     epochs: 100,
     validationData: validDs,
@@ -231,6 +257,9 @@ const run = async () => {
     validDs,
   );
 
+  // Evaluate the model
+  // We use the test data to evaluate the model
+  // We use the confusion matrix to see how the model performs
   const preds = model.predict(xTest).argMax(-1);
   const labels = yTest.argMax(-1);
 
