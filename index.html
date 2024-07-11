@@ -8,9 +8,18 @@
   <body>
     <h1>Predicting lead scores</h1>
 
+    <div id="outcome-cont" />
+    <div id="interactive-demo-cont" />
+    <div id="glucose-cont" />
+    <div id="age-cont" />
+    <div id="glucose-age-cont" />
+    <div id="skin-bmi-cont" />
+    <div id="loss-cont"></div>
+    <div id="acc-cont"></div>
+    <div id="confusion-matrix"></div>
+
     <section id="form_section">
-      <div id="tutorial"></div>
-      <hr />
+      <h2>Can we predict if this is a customer????</h2>
       <form id="form_calulation">
         <label>
           Demo completion %
@@ -33,22 +42,14 @@
             max="100"
           />
         </label>
-
         <button type="submit">Calculate</button>
+
+        <div id="outcome">
+          <p id="prediction"></p>
+        </div>
       </form>
       <hr />
     </section>
-
-    <div id="outcome-cont" />
-    <div id="interactive-demo-cont" />
-    <div id="glucose-cont" />
-    <div id="age-cont" />
-    <div id="glucose-age-cont" />
-    <div id="skin-bmi-cont" />
-    <div id="loss-cont"></div>
-    <div id="acc-cont"></div>
-    <div id="confusion-matrix"></div>
-
     <script src="src/index.js"></script>
   </body>
 </html>

@@ -101,7 +101,7 @@ const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
   // We use callbacks to log the loss and accuracy
   // We also use tfvis to visualize the training process
   await model.fitDataset(trainDs, {
-    epochs: 100,
+    epochs: 10,
     validationData: validDs,
     callbacks: {
       onEpochEnd: async (_, logs) => {
@@ -115,46 +115,6 @@ const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
   console.log("Model training completed");
   return model;
 };
-
-// const trainComplexModel = async (featureCount, trainDs, validDs) => {
-//   const model = tf.sequential();
-//   model.add(
-//     tf.layers.dense({
-//       units: 12,
-//       activation: "relu",
-//       inputShape: [featureCount],
-//     }),
-//   );
-//   model.add(
-//     tf.layers.dense({
-//       units: 2,
-//       activation: "softmax",
-//     }),
-//   );
-//   const optimizer = tf.train.adam(0.0001);
-//   model.compile({
-//     optimizer: optimizer,
-//     loss: "binaryCrossentropy",
-//     metrics: ["accuracy"],
-//   });
-//   const trainLogs = [];
-//   const lossContainer = document.getElementById("loss-cont");
-//   const accContainer = document.getElementById("acc-cont");
-//   console.log("Training...");
-//   await model.fitDataset(trainDs, {
-//     epochs: 100,
-//     validationData: validDs,
-//     callbacks: {
-//       onEpochEnd: async (epoch, logs) => {
-//         trainLogs.push(logs);
-//         tfvis.show.history(lossContainer, trainLogs, ["loss", "val_loss"]);
-//         tfvis.show.history(accContainer, trainLogs, ["acc", "val_acc"]);
-//       },
-//     },
-//   });
-//
-//   return model;
-// };
 
 const run = async () => {
   const data = await prepareData();
@@ -204,15 +164,13 @@ let model;
 if (document.readyState !== "loading") {
   // run();
   run().then((r) => {
-    formSection.style.display = "block";
-
+    formSection.style.display = "flex";
     model = r;
   });
 } else {
   document.addEventListener("DOMContentLoaded", () => {
     run().then((r) => {
-      formSection.style.display = "block";
-
+      formSection.style.display = "flex";
       model = r;
     });
   });
@@ -247,6 +205,11 @@ const submitCalculation = (e) => {
   // get the outcome
   const outcome = prediction.argMax(-1).dataSync()[0];
   console.log("OUTCOME:", outcome);
+
+  const outcomeElement = document.getElementById("outcome");
+  outcomeElement.style.display = "block";
+  outcomeElement.innerText =
+    outcome === 0 ? "They won't be a Customer" : "They will be a Customer";
 };
 
 form.addEventListener("submit", submitCalculation);
