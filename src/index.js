@@ -25,7 +25,7 @@ const oneHot = (outcome) => Array.from(tf.oneHot(outcome, 2).dataSync());
 
 const prepareData = async () => {
   const csv = await Papa.parsePromise(
-    "https://raw.githubusercontent.com/misterbracket/logistic-regression-tensorflow-js/main/src/data/fake_data.csv",
+    "https://raw.githubusercontent.com/misterbracket/logistic-regression-tensorflow-js/main/src/data/fake_data_2.csv",
   );
   return csv.data;
 };

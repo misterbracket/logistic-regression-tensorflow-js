@@ -23,6 +23,17 @@ export const renderGraphs = (data) => {
       xLabel: "Revisiting Lead Status in Percentage",
     },
   );
+
+  // renderScatter(
+  //   "lead-status-demo-cont",
+  //   data,
+  //   ["revisiting_lead_status", "interactive_demo_completion"],
+  //   {
+  //     title: "Interactive Demo vs Revisiting Lead Status",
+  //     xLabel: "Revisiting Lead Status",
+  //     yLabel: "Interactive Demo Completion Rate",
+  //   },
+  // );
 };
 
 export const renderOutcomes = (data) => {
@@ -87,15 +98,15 @@ const renderHistogram = (container, data, column, config) => {
 };
 
 const renderScatter = (container, data, columns, config) => {
-  const diabetic = data.filter((r) => r.Outcome === 1);
-  const healthy = data.filter((r) => r.Outcome === 0);
+  const customer = data.filter((r) => r.has_converted === 1);
+  const noCustomer = data.filter((r) => r.has_converted === 0);
 
   var dTrace = {
-    x: diabetic.map((r) => r[columns[0]]),
-    y: diabetic.map((r) => r[columns[1]]),
+    x: customer.map((r) => r[columns[0]]),
+    y: customer.map((r) => r[columns[1]]),
     mode: "markers",
     type: "scatter",
-    name: "Diabetic",
+    name: "Customer",
     opacity: 0.4,
     marker: {
       color: "gold",
@@ -103,11 +114,11 @@ const renderScatter = (container, data, columns, config) => {
   };
 
   var hTrace = {
-    x: healthy.map((r) => r[columns[0]]),
-    y: healthy.map((r) => r[columns[1]]),
+    x: noCustomer.map((r) => r[columns[0]]),
+    y: noCustomer.map((r) => r[columns[1]]),
     mode: "markers",
     type: "scatter",
-    name: "Healthy",
+    name: "NoCustomer",
     opacity: 0.4,
     marker: {
       color: "forestgreen",
