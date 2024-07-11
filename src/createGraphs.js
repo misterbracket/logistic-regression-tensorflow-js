@@ -4,10 +4,15 @@ import _ from "lodash";
 export const renderGraphs = (data) => {
   console.log("Rendering graphs...");
 
-  // renderHistogram("insulin-cont", data, "Insulin", {
-  //   title: "Insulin levels",
-  //   xLabel: "Insulin 2-hour serum, mu U/ml",
-  // });
+  renderHistogram(
+    "interactive-demo-cont",
+    data,
+    "interactive_demo_completion",
+    {
+      title: "Interactive Demo",
+      xLabel: "Interactive Demo Completion Rate",
+    },
+  );
   //
   // renderHistogram("glucose-cont", data, "Glucose", {
   //   title: "Glucose concentration",
@@ -84,12 +89,17 @@ export const renderOutcomes = (data) => {
 };
 
 const renderHistogram = (container, data, column, config) => {
-  const diabetic = data.filter((r) => r.Outcome === 1).map((r) => r[column]);
-  const healthy = data.filter((r) => r.Outcome === 0).map((r) => r[column]);
+  const customer = data
+    .filter((r) => r.has_converted === 1)
+    .map((r) => r[column]);
 
-  const dTrace = {
-    name: "diabetic",
-    x: diabetic,
+  const noCustomer = data
+    .filter((r) => r.has_converted === 0)
+    .map((r) => r[column]);
+
+  const customerTrace = {
+    name: "customer",
+    x: customer,
     type: "histogram",
     opacity: 0.6,
     marker: {
@@ -97,9 +107,9 @@ const renderHistogram = (container, data, column, config) => {
     },
   };
 
-  const hTrace = {
-    name: "healthy",
-    x: healthy,
+  const noCustomerTrace = {
+    name: "noCustomer",
+    x: noCustomer,
     type: "histogram",
     opacity: 0.4,
     marker: {
@@ -107,7 +117,7 @@ const renderHistogram = (container, data, column, config) => {
     },
   };
 
-  Plotly.newPlot(container, [dTrace, hTrace], {
+  Plotly.newPlot(container, [customerTrace, noCustomerTrace], {
     barmode: "overlay",
     xaxis: {
       title: config.xLabel,
