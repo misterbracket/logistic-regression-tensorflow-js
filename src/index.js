@@ -4,7 +4,7 @@ import * as tf from "@tensorflow/tfjs";
 import * as tfvis from "@tensorflow/tfjs-vis";
 import * as Papa from "papaparse";
 import _ from "lodash";
-import Plotly from "plotly.js-dist";
+import { renderOutcomes } from "./createGraphs.js";
 
 Papa.parsePromise = function (file) {
   return new Promise(function (complete, error) {
@@ -22,14 +22,14 @@ const oneHot = (outcome) => Array.from(tf.oneHot(outcome, 2).dataSync());
 
 const prepareData = async () => {
   const csv = await Papa.parsePromise(
-    "https://raw.githubusercontent.com/curiousily/Logistic-Regression-with-TensorFlow-js/master/src/data/diabetes.csv",
+    "https://raw.githubusercontent.com/misterbracket/logistic-regression-tensorflow-js/main/src/data/leads_generated_test_data.csv",
   );
-
   return csv.data;
 };
 
+//TODO: For now this only works with continuous features
 const createDataSets = (data, features, testSize, batchSize) => {
-  //These arre the features that will be used to train the model
+  //These are the features that will be used to train the model
   const X = data.map((r) =>
     features.map((f) => {
       const val = r[f];
@@ -40,7 +40,7 @@ const createDataSets = (data, features, testSize, batchSize) => {
   // The outcome of the model
   // We use one hot encoding to represent the outcome
   const y = data.map((r) => {
-    const outcome = r.Outcome === undefined ? 0 : r.Outcome;
+    const outcome = r.has_converted === undefined ? 0 : r.has_converted;
     return oneHot(outcome);
   });
 
@@ -60,101 +60,6 @@ const createDataSets = (data, features, testSize, batchSize) => {
     tf.tensor(X.slice(splitIdx)),
     tf.tensor(y.slice(splitIdx)),
   ];
-};
-
-const renderOutcomes = (data) => {
-  const outcomes = data.map((r) => r.Outcome);
-
-  const [diabetic, healthy] = _.partition(outcomes, (o) => o === 1);
-
-  const chartData = [
-    {
-      labels: ["Diabetic", "Healthy"],
-      values: [diabetic.length, healthy.length],
-      type: "pie",
-      opacity: 0.6,
-      marker: {
-        colors: ["gold", "forestgreen"],
-      },
-    },
-  ];
-
-  Plotly.newPlot("outcome-cont", chartData, {
-    title: "Healthy vs Diabetic",
-  });
-};
-
-const renderHistogram = (container, data, column, config) => {
-  const diabetic = data.filter((r) => r.Outcome === 1).map((r) => r[column]);
-  const healthy = data.filter((r) => r.Outcome === 0).map((r) => r[column]);
-
-  const dTrace = {
-    name: "diabetic",
-    x: diabetic,
-    type: "histogram",
-    opacity: 0.6,
-    marker: {
-      color: "gold",
-    },
-  };
-
-  const hTrace = {
-    name: "healthy",
-    x: healthy,
-    type: "histogram",
-    opacity: 0.4,
-    marker: {
-      color: "forestgreen",
-    },
-  };
-
-  Plotly.newPlot(container, [dTrace, hTrace], {
-    barmode: "overlay",
-    xaxis: {
-      title: config.xLabel,
-    },
-    yaxis: { title: "Count" },
-    title: config.title,
-  });
-};
-
-const renderScatter = (container, data, columns, config) => {
-  const diabetic = data.filter((r) => r.Outcome === 1);
-  const healthy = data.filter((r) => r.Outcome === 0);
-
-  var dTrace = {
-    x: diabetic.map((r) => r[columns[0]]),
-    y: diabetic.map((r) => r[columns[1]]),
-    mode: "markers",
-    type: "scatter",
-    name: "Diabetic",
-    opacity: 0.4,
-    marker: {
-      color: "gold",
-    },
-  };
-
-  var hTrace = {
-    x: healthy.map((r) => r[columns[0]]),
-    y: healthy.map((r) => r[columns[1]]),
-    mode: "markers",
-    type: "scatter",
-    name: "Healthy",
-    opacity: 0.4,
-    marker: {
-      color: "forestgreen",
-    },
-  };
-
-  var chartData = [dTrace, hTrace];
-
-  Plotly.newPlot(container, chartData, {
-    title: config.title,
-    xaxis: {
-      title: config.xLabel,
-    },
-    yaxis: { title: config.yLabel },
-  });
 };
 
 const trainLogisticRegression = async (featureCount, trainDs, validDs) => {
@@ -214,35 +119,9 @@ const run = async () => {
 
   renderOutcomes(data);
 
-  renderHistogram("insulin-cont", data, "Insulin", {
-    title: "Insulin levels",
-    xLabel: "Insulin 2-hour serum, mu U/ml",
-  });
+  renderGraphs(data);
 
-  renderHistogram("glucose-cont", data, "Glucose", {
-    title: "Glucose concentration",
-    xLabel:
-      "Plasma glucose concentration (2 hour after glucose tolerance test)",
-  });
-
-  renderHistogram("age-cont", data, "Age", {
-    title: "Age",
-    xLabel: "age (years)",
-  });
-
-  renderScatter("glucose-age-cont", data, ["Glucose", "Age"], {
-    title: "Glucose vs Age",
-    xLabel: "Glucose",
-    yLabel: "Age",
-  });
-
-  renderScatter("skin-bmi-cont", data, ["SkinThickness", "BMI"], {
-    title: "Skin thickness vs BMI",
-    xLabel: "Skin thickness",
-    yLabel: "BMI",
-  });
-
-  const features = ["Glucose"];
+  const features = ["interactive_demo_completion"];
 
   const [trainDs, validDs, xTest, yTest] = createDataSets(
     data,
@@ -251,26 +130,27 @@ const run = async () => {
     16,
   );
 
-  const model = await trainLogisticRegression(
-    features.length,
-    trainDs,
-    validDs,
-  );
-
+  // const model = await trainLogisticRegression(
+  //   features.length,
+  //   trainDs,
+  //   validDs,
+  // );
+  //
   // Evaluate the model
   // We use the test data to evaluate the model
   // We use the confusion matrix to see how the model performs
-  const preds = model.predict(xTest).argMax(-1);
-  const labels = yTest.argMax(-1);
-
-  const confusionMatrix = await tfvis.metrics.confusionMatrix(labels, preds);
-
-  const container = document.getElementById("confusion-matrix");
-
-  tfvis.render.confusionMatrix(container, {
-    values: confusionMatrix,
-    tickLabels: ["Healthy", "Diabetic"],
-  });
+  //   const preds = model.predict(xTest).argMax(-1);
+  //   const labels = yTest.argMax(-1);
+  //
+  //   const confusionMatrix = await tfvis.metrics.confusionMatrix(labels, preds);
+  //
+  //   const container = document.getElementById("confusion-matrix");
+  //
+  //   tfvis.render.confusionMatrix(container, {
+  //     values: confusionMatrix,
+  //     tickLabels: ["Healthy", "Diabetic"],
+  //   });
+  // };
 };
 
 if (document.readyState !== "loading") {
