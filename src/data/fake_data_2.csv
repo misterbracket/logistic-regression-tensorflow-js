@@ -1,0 +1,301 @@
+uid,interactive_demo_completion,revisiting_lead_status,demand_source,sign_up_source,has_converted
+uuid_1,0,0.33,Word of Mouth / Direct,website,0
+uuid_2,1,0.92,Other,,1
+uuid_3,0,0.33,Paid Search,website,0
+uuid_4,1,0.74,Paid Search,website,1
+uuid_5,0,0.21,Word of Mouth / Direct,,0
+uuid_6,0,0.35,Paid Search,website,0
+uuid_7,1,0.78,Word of Mouth / Direct,website,1
+uuid_8,0,0.30,Paid Search,website,0
+uuid_9,0,0.31,Word of Mouth / Direct,website,0
+uuid_10,0,0.46,Paid Search,,0
+uuid_11,1,0.64,Paid Search,website,1
+uuid_12,0,0.30,Paid Search,,0
+uuid_13,0,0.21,Word of Mouth / Direct,website,0
+uuid_14,1,0.74,Other,website,1
+uuid_15,1,0.71,Paid Search,website,1
+uuid_16,1,0.61,Word of Mouth / Direct,website,1
+uuid_17,1,0.60,Paid Search,website,1
+uuid_18,0,0.37,Paid Search,website,0
+uuid_19,0,0.26,Word of Mouth / Direct,website,0
+uuid_20,0,0.20,Word of Mouth / Direct,website,0
+uuid_21,0,0.28,Word of Mouth / Direct,website,0
+uuid_22,1,0.70,Other,website,1
+uuid_23,0,0.35,Paid Search,website,0
+uuid_24,1,0.64,Paid Search,website,1
+uuid_25,0,0.37,Paid Search,website,0
+uuid_26,0,0.18,Paid Search,,0
+uuid_27,0,0.27,Paid Search,website,0
+uuid_28,0,0.26,Paid Search,,0
+uuid_29,0,0.37,Paid Search,,0
+uuid_30,0,0.40,Paid Search,website,0
+uuid_31,1,0.71,Other,website,1
+uuid_32,0,0.27,Paid Search,,0
+uuid_33,1,0.47,Word of Mouth / Direct,website,1
+uuid_34,1,0.69,Word of Mouth / Direct,website,1
+uuid_35,1,0.88,Paid Search,website,1
+uuid_36,1,0.63,Word of Mouth / Direct,website,1
+uuid_37,1,0.74,Word of Mouth / Direct,,1
+uuid_38,1,0.58,Paid Search,website,1
+uuid_39,0,0.23,Paid Search,website,0
+uuid_40,1,0.71,Paid Search,website,1
+uuid_41,1,0.90,Word of Mouth / Direct,website,1
+uuid_42,0,0.33,Paid Search,,0
+uuid_43,0,0.30,Word of Mouth / Direct,website,0
+uuid_44,1,0.79,Other,website,1
+uuid_45,0,0.38,Paid Search,,0
+uuid_46,1,0.63,Word of Mouth / Direct,website,1
+uuid_47,0,0.10,Paid Search,,0
+uuid_48,0,0.38,Paid Search,,0
+uuid_49,0,0.35,Word of Mouth / Direct,website,0
+uuid_50,0,0.21,Paid Search,website,0
+uuid_51,1,0.59,Word of Mouth / Direct,website,1
+uuid_52,0,0.34,Paid Search,,0
+uuid_53,0,0.33,Paid Search,,0
+uuid_54,0,0.14,Paid Search,,0
+uuid_55,1,0.87,Word of Mouth / Direct,website,1
+uuid_56,0,0.15,Paid Search,,0
+uuid_57,0,0.40,Paid Search,,0
+uuid_58,0,0.23,Paid Search,,0
+uuid_59,0,0.22,Paid Search,website,0
+uuid_60,1,0.59,Word of Mouth / Direct,website,1
+uuid_61,1,0.69,Word of Mouth / Direct,,1
+uuid_62,1,0.81,Paid Search,website,1
+uuid_63,0,0.26,Paid Search,,0
+uuid_64,1,0.79,Paid Search,,1
+uuid_65,1,0.58,Paid Search,website,1
+uuid_66,1,0.80,Word of Mouth / Direct,website,1
+uuid_67,0,0.34,Paid Search,,0
+uuid_68,0,0.32,Paid Search,website,0
+uuid_69,1,0.66,Other,website,1
+uuid_70,1,0.84,Paid Search,website,1
+uuid_71,0,0.42,Paid Search,,0
+uuid_72,0,0.21,Paid Search,,0
+uuid_73,0,0.42,Paid Search,,0
+uuid_74,0,0.31,Paid Search,,0
+uuid_75,0,0.23,Paid Search,,0
+uuid_76,1,0.56,Other,website,1
+uuid_77,0,0.09,Word of Mouth / Direct,website,0
+uuid_78,0,0.32,Paid Search,website,0
+uuid_79,0,0.19,Word of Mouth / Direct,website,0
+uuid_80,1,0.81,Word of Mouth / Direct,website,1
+uuid_81,1,0.76,Word of Mouth / Direct,website,1
+uuid_82,0,0.21,Paid Search,website,0
+uuid_83,0,0.15,Paid Search,,0
+uuid_84,0,0.30,Other,website,0
+uuid_85,1,0.81,Word of Mouth / Direct,website,1
+uuid_86,1,0.80,Paid Search,website,1
+uuid_87,0,0.15,Word of Mouth / Direct,,0
+uuid_88,1,0.77,Word of Mouth / Direct,website,1
+uuid_89,0,0.14,Word of Mouth / Direct,website,0
+uuid_90,0,0.27,Word of Mouth / Direct,website,0
+uuid_91,1,0.51,Word of Mouth / Direct,website,1
+uuid_92,0,0.26,Word of Mouth / Direct,,0
+uuid_93,0,0.34,Paid Social,website,0
+uuid_94,1,0.91,Word of Mouth / Direct,website,1
+uuid_95,1,0.71,Paid Social,,1
+uuid_96,0,0.43,Word of Mouth / Direct,,0
+uuid_97,0,0.16,Paid Social,website,0
+uuid_98,0,0.18,Word of Mouth / Direct,website,0
+uuid_99,0,0.35,Paid Social,website,0
+uuid_100,1,0.65,Word of Mouth / Direct,website,1
+uuid_101,1,0.81,Word of Mouth / Direct,website,1
+uuid_102,1,0.76,Word of Mouth / Direct,website,1
+uuid_103,0,0.20,Word of Mouth / Direct,website,0
+uuid_104,0,0.43,Word of Mouth / Direct,website,0
+uuid_105,1,0.73,Partners,website,1
+uuid_106,1,0.72,Word of Mouth / Direct,website,1
+uuid_107,1,0.76,Word of Mouth / Direct,website,1
+uuid_108,1,0.79,Other,website,1
+uuid_109,1,0.63,Other,,1
+uuid_110,1,0.68,Paid Search,website,1
+uuid_111,1,0.78,Other,,1
+uuid_112,1,0.80,Other,,1
+uuid_113,0,0.39,Paid Search,website,0
+uuid_114,1,0.76,Word of Mouth / Direct,website,1
+uuid_115,1,0.68,AE Outreach,,1
+uuid_116,1,0.76,Other,,1
+uuid_117,1,0.63,Word of Mouth / Direct,website,1
+uuid_118,1,0.75,Word of Mouth / Direct,website,1
+uuid_119,1,0.72,Paid Search,website,1
+uuid_120,1,0.75,Word of Mouth / Direct,website,1
+uuid_121,1,0.58,Other,,1
+uuid_122,0,0.37,Word of Mouth / Direct,website,0
+uuid_123,0,0.33,Paid Social,,0
+uuid_124,0,0.41,Word of Mouth / Direct,website,0
+uuid_125,1,0.78,Paid Search,website,1
+uuid_126,0,0.37,Word of Mouth / Direct,website,0
+uuid_127,0,0.33,Word of Mouth / Direct,,0
+uuid_128,0,0.21,Paid Social,,0
+uuid_129,1,0.88,Word of Mouth / Direct,website,1
+uuid_130,1,0.65,Paid Search,website,1
+uuid_131,1,0.64,Paid Search,website,1
+uuid_132,1,0.76,Word of Mouth / Direct,website,1
+uuid_133,1,0.76,Word of Mouth / Direct,website,1
+uuid_134,1,0.71,Paid Social,website,1
+uuid_135,0,0.43,Paid Social,,0
+uuid_136,1,0.68,AE Outreach,website,1
+uuid_137,1,0.68,Word of Mouth / Direct,website,1
+uuid_138,1,0.72,Word of Mouth / Direct,,1
+uuid_139,1,0.63,Word of Mouth / Direct,website,1
+uuid_140,1,0.72,Paid Search,website,1
+uuid_141,1,0.73,Word of Mouth / Direct,website,1
+uuid_142,1,0.89,Other,,1
+uuid_143,0,0.12,Other,website,0
+uuid_144,1,0.76,Word of Mouth / Direct,website,1
+uuid_145,1,0.78,Word of Mouth / Direct,website,1
+uuid_146,1,0.66,Partners,website,1
+uuid_147,0,0.32,Word of Mouth / Direct,website,0
+uuid_148,0,0.32,Word of Mouth / Direct,,0
+uuid_149,1,0.75,Word of Mouth / Direct,website,1
+uuid_150,1,0.65,Paid Social,website,1
+uuid_151,1,0.70,Word of Mouth / Direct,website,1
+uuid_152,1,0.65,Paid Search,website,1
+uuid_153,1,0.55,Word of Mouth / Direct,website,1
+uuid_154,1,0.73,Paid Search,website,1
+uuid_155,1,0.70,Word of Mouth / Direct,website,1
+uuid_156,1,0.59,Paid Social,website,1
+uuid_157,1,0.68,Word of Mouth / Direct,website,1
+uuid_158,1,0.65,Paid Social,website,1
+uuid_159,1,0.83,Other,website,1
+uuid_160,1,0.69,Paid Social,website,1
+uuid_161,0,0.38,Paid Social,,0
+uuid_162,1,0.69,Paid Search,website,1
+uuid_163,0,0.43,Paid Social,,0
+uuid_164,1,0.80,Partners,website,1
+uuid_165,0,0.36,Paid Social,website,0
+uuid_166,1,0.74,Other,website,1
+uuid_167,1,0.73,Word of Mouth / Direct,website,1
+uuid_168,1,0.65,Paid Social,website,1
+uuid_169,0,0.32,Paid Social,website,0
+uuid_170,1,0.61,Paid Social,website,1
+uuid_171,1,0.79,Paid Search,website,1
+uuid_172,1,0.88,Word of Mouth / Direct,website,1
+uuid_173,0,0.06,Word of Mouth / Direct,,0
+uuid_174,1,0.75,Partners,website,1
+uuid_175,1,0.79,Paid Social,website,1
+uuid_176,1,0.68,Word of Mouth / Direct,website,1
+uuid_177,1,0.66,Paid Search,website,1
+uuid_178,1,0.85,Word of Mouth / Direct,,1
+uuid_179,1,0.76,Paid Search,website,1
+uuid_180,1,0.73,Paid Social,website,1
+uuid_181,1,0.67,Word of Mouth / Direct,website,1
+uuid_182,1,0.77,Word of Mouth / Direct,website,1
+uuid_183,0,0.48,Word of Mouth / Direct,,0
+uuid_184,0,0.31,Paid Search,,0
+uuid_185,1,0.56,Partners,website,1
+uuid_186,1,0.71,Paid Search,website,1
+uuid_187,0,0.17,Word of Mouth / Direct,website,0
+uuid_188,1,0.87,Word of Mouth / Direct,website,1
+uuid_189,0,0.38,Word of Mouth / Direct,website,0
+uuid_190,0,0.29,Word of Mouth / Direct,website,0
+uuid_191,0,0.41,Word of Mouth / Direct,website,0
+uuid_192,1,0.82,Paid Search,website,1
+uuid_193,1,0.73,Word of Mouth / Direct,website,1
+uuid_194,1,0.79,Word of Mouth / Direct,,1
+uuid_195,0,0.36,Other,website,0
+uuid_196,1,0.61,Paid Search,website,1
+uuid_197,0,0.45,Word of Mouth / Direct,website,0
+uuid_198,1,0.74,Word of Mouth / Direct,website,1
+uuid_199,1,0.58,Word of Mouth / Direct,,1
+uuid_200,0,0.48,Paid Social,website,0
+uuid_201,1,0.90,Paid Search,website,1
+uuid_202,1,0.79,Word of Mouth / Direct,,1
+uuid_203,1,0.79,Word of Mouth / Direct,website,1
+uuid_204,0,0.40,Word of Mouth / Direct,,0
+uuid_205,0,0.21,Paid Social,website,0
+uuid_206,1,0.60,Word of Mouth / Direct,,1
+uuid_207,0,0.37,Paid Social,website,0
+uuid_208,0,0.28,Word of Mouth / Direct,website,0
+uuid_209,1,0.82,Word of Mouth / Direct,website,1
+uuid_210,0,0.22,Paid Social,,0
+uuid_211,1,0.85,Other,website,1
+uuid_212,1,0.74,Paid Social,website,1
+uuid_213,1,0.56,Word of Mouth / Direct,website,1
+uuid_214,1,0.61,Word of Mouth / Direct,website,1
+uuid_215,1,0.79,Paid Search,website,1
+uuid_216,0,0.25,Partners,,0
+uuid_217,1,0.76,Word of Mouth / Direct,,1
+uuid_218,1,0.88,Word of Mouth / Direct,website,1
+uuid_219,0,0.09,Word of Mouth / Direct,,0
+uuid_220,1,0.63,Word of Mouth / Direct,website,1
+uuid_221,1,0.72,Word of Mouth / Direct,website,1
+uuid_222,1,0.62,Word of Mouth / Direct,website,1
+uuid_223,1,0.73,Word of Mouth / Direct,website,1
+uuid_224,1,0.66,Word of Mouth / Direct,,1
+uuid_225,1,0.61,Word of Mouth / Direct,website,1
+uuid_226,1,0.62,Paid Social,website,1
+uuid_227,0,0.26,Word of Mouth / Direct,,0
+uuid_228,1,0.62,Other,website,1
+uuid_229,1,0.76,Word of Mouth / Direct,website,1
+uuid_230,1,0.75,Partners,platform_partner,1
+uuid_231,0,0.23,Word of Mouth / Direct,,0
+uuid_232,1,0.75,Word of Mouth / Direct,,1
+uuid_233,1,0.86,Word of Mouth / Direct,website,1
+uuid_234,1,0.78,Word of Mouth / Direct,website,1
+uuid_235,1,0.55,Partners,website,1
+uuid_236,0,0.14,Partners,website,0
+uuid_237,0,0.23,Word of Mouth / Direct,,0
+uuid_238,0,0.17,Word of Mouth / Direct,website,0
+uuid_239,1,0.67,Other,,1
+uuid_240,0,0.44,Paid Social,website,0
+uuid_241,1,0.72,Word of Mouth / Direct,website,1
+uuid_242,1,0.46,Other,,1
+uuid_243,1,0.71,Word of Mouth / Direct,website,1
+uuid_244,1,0.59,Word of Mouth / Direct,website,1
+uuid_245,1,0.83,Paid Social,website,1
+uuid_246,1,0.77,Word of Mouth / Direct,website,1
+uuid_247,1,0.78,Paid Social,website,1
+uuid_248,1,0.61,Word of Mouth / Direct,,1
+uuid_249,0,0.12,Paid Social,,0
+uuid_250,0,0.66,Word of Mouth / Direct,,1
+uuid_251,0,0.62,Word of Mouth / Direct,website,1
+uuid_252,0,0.76,Other,website,1
+uuid_253,0,0.68,Partners,website,1
+uuid_254,0,0.88,Paid Social,website,1
+uuid_255,0,0.73,Paid Search,website,1
+uuid_256,0,0.75,Paid Social,website,1
+uuid_257,0,0.54,Paid Social,website,1
+uuid_258,0,0.69,Partners,,1
+uuid_259,0.5,0.25,Other,website,0
+uuid_260,0,0.76,Paid Social,website,1
+uuid_261,0,0.75,Paid Social,website,0
+uuid_262,0,0.74,Paid Search,website,1
+uuid_263,0,0.77,Word of Mouth / Direct,,0
+uuid_264,0,0.79,Word of Mouth / Direct,website,0
+uuid_265,0,0.70,Word of Mouth / Direct,website,1
+uuid_266,0,0.65,Word of Mouth / Direct,website,1
+uuid_267,0,0.81,Paid Search,website,0
+uuid_268,0,0.60,Word of Mouth / Direct,website,1
+uuid_269,0,0.83,Paid Search,,0
+uuid_270,0,0.85,Paid Search,website,0
+uuid_271,0,0.51,Word of Mouth / Direct,website,1
+uuid_272,0,0.59,Word of Mouth / Direct,website,1
+uuid_273,0,0.87,Word of Mouth / Direct,,0
+uuid_274,0,0.89,Paid Social,website,0
+uuid_275,0,0.8,Paid Search,website,0
+uuid_276,0.5,0.7,Other,,0
+uuid_277,0,0.12,Word of Mouth / Direct,website,1
+uuid_278,0,0.14,Word of Mouth / Direct,website,1
+uuid_279,0,0.17,Paid Search,website,1
+uuid_280,0,0.21,Paid Search,website,1
+uuid_281,0,0.24,AE Outreach,,1
+uuid_282,0,0.27,Word of Mouth / Direct,,1
+uuid_283,0,0.30,Word of Mouth / Direct,,1
+uuid_284,0,0.33,Word of Mouth / Direct,website,1
+uuid_285,0,0.36,Word of Mouth / Direct,website,1
+uuid_286,0,0.39,Word of Mouth / Direct,,1
+uuid_287,0,0.7,Paid Social,website,0
+uuid_288,0,0.7,Word of Mouth / Direct,,0
+uuid_289,0,0.42,Word of Mouth / Direct,website,1
+uuid_290,0,0.45,Word of Mouth / Direct,website,1
+uuid_291,0,0.48,Word of Mouth / Direct,website,1
+uuid_292,0,0.78,Paid Search,website,0
+uuid_293,0,0.78,Word of Mouth / Direct,website,0
+uuid_294,0,0.51,Word of Mouth / Direct,website,1
+uuid_295,0,0.54,AE Outreach,,1
+uuid_296,0,0.57,Word of Mouth / Direct,website,1
+uuid_297,0.5,0.60,Word of Mouth / Direct,website,1
+uuid_298,0,0.63,Word of Mouth / Direct,,1
+uuid_299,0.5,0.66,Other,,1
+uuid_300,0,0.8,Paid Search,website,1
