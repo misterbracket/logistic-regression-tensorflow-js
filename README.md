@@ -1,2 +1,4 @@
 # logistic-regression-tensorflow-js
-Created with CodeSandbox
+
+
+This was a hackathon project to guess how likely a given lead will convert using TensorFlow.js
